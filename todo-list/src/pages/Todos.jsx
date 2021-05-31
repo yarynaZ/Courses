@@ -47,8 +47,8 @@ function Todos () {
     );
   }
 
-  const addTodo = text => {
-    setTodos([...todos, {text}]);
+  const addTodo = title => {
+    setTodos([...todos, {title}]);
   }
 
   const removeTodo = index => {

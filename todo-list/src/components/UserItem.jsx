@@ -5,7 +5,7 @@ function UserItem({userItem, index, removeUser}) {
       <div className="container">
         <div className="list-group-item">{userItem.name}</div>
         <div>
-          <button onClick={() => removeUser(index)}>x</button>
+          <button className='x-btn' onClick={() => removeUser(index)}>x</button>
         </div>
       </div>
   )
