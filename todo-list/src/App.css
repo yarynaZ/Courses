@@ -1,0 +1,71 @@
+.app {
+  background: azure;
+  height: 100vh;
+  padding: 30px;
+}
+
+.todo-list, .user-list {
+  background: lightseagreen;
+  border-radius: 4px;
+  max-width: 400px;
+  padding: 5px;
+  margin-right: 40px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.todo, .user, .input {
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+  padding: 3px 10px;
+  width: 95%;
+  margin: 3px 5px 3px 0;
+}
+
+.input {
+  width: 85%;
+  border: none;
+  margin-left: 15px;
+}
+
+.input::placeholder {
+  text-align: left;
+  padding-left: 5px;
+
+}
+
+.input:focus {
+  border: 1px solid;
+  outline: none;
+}
+
+button {
+  background-color: lemonchiffon;
+  border-radius: 50%;
+  border: none;
+  padding: 3px 9px;
+}
+
+.users {
+  display: flex !important;
+  width: 500px;
+  justify-content: space-between;
+}
+
+.users-page {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-item {
+  padding-left: 15px;
+}
+.nav-link {
+  font-size: x-large;
+
+}
