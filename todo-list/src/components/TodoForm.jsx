@@ -1,13 +1,15 @@
 import React from 'react';
 import './../App.css';
 
-function TodoForm({addTodo}) {
+function TodoForm({addNewTodo}) {
   const [value, setValue] = React.useState("");
+
+  let nextId = 500;
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
-    addTodo(value);
+    addNewTodo({id: nextId++, title: value});
     setValue("");
   };
 

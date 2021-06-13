@@ -1,12 +1,12 @@
 import React from 'react';
 
 
-function TodoItem({todoItem, index, removeTodo}) {
+function TodoItem({todoItem, removeTodo, id}) {
   return (
       <div className="container">
         <div className="list-group-item">{todoItem.title}</div>
         <div>
-          <button className='x-btn' onClick={() => removeTodo(index)}>x</button>
+          <button className='x-btn' onClick={() => removeTodo(id)}>x</button>
         </div>
       </div>
   )

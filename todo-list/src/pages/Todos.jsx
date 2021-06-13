@@ -2,24 +2,12 @@ import React, {useEffect, useState} from 'react';
 import TodoForm from '../components/TodoForm';
 import TodoItem from '../components/TodoItem';
 import {Link, Route, useParams, useRouteMatch} from "react-router-dom";
+import {connect} from "react-redux";
+import {addNewTodo, removeTodo, fetchTodos} from "../redux/actions/todos";
 
-function Todos () {
-  const [todos, setTodos] = React.useState([])
+function Todos ({todoData, fetchTodos, removeTodo, addNewTodo}) {
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch(
-          "https://jsonplaceholder.typicode.com/todos"
-      );
-
-      const json = await res.json();
-      setTodos(json);
-    }
-
-    fetchData();
-  }, []);
-
-  const {url} = useRouteMatch();
+  useEffect(() => {fetchTodos()}, [fetchTodos]);
 
   const Todo = () => {
     const {id} = useParams();
@@ -47,37 +35,45 @@ function Todos () {
     );
   }
 
-  const addTodo = title => {
-    setTodos([...todos, {title}]);
-  }
-
-  const removeTodo = index => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
-  };
-
-
   return (
       <div className="users-page">
         <div className="list-group">
+          <TodoForm addNewTodo={addNewTodo}/>
           {
-            todos.map((todoItem, index) => <div className="list-group-item users">
-              <TodoItem todoItem={todoItem}
-                        index={index}
-                        removeTodo={removeTodo}
-                        key={index}/>
-            </div>)
+            todoData && todoData.loading ?
+                (<h2>...loading</h2>) :
+                todoData && todoData.error ?
+                    (<h2>{todoData.error}</h2>) :
+                    todoData && todoData.todos && todoData.todos.map((todoItem, index) =>
+                <TodoItem todoItem={todoItem}
+                          id={todoItem.id}
+                          removeTodo={removeTodo}
+                          index={index}
+                          key={index}/>)
           }
-          <br/>
-          <TodoForm addTodo={addTodo}/>
         </div>
         <Route path="/todos/:id">
-          {/* <Route path={`${path}/:id/`}> */}
           <Todo />
         </Route>
       </div>
   );
 }
 
-export default Todos;
+const mapStateToProps = state => {
+  return {
+    todoData: state.todos
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchTodos: () => dispatch(fetchTodos()),
+    addNewTodo: (todo) => dispatch(addNewTodo(todo)),
+    removeTodo: (id) => dispatch(removeTodo(id)),
+  }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+) (Todos);

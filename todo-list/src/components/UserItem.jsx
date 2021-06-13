@@ -1,11 +1,11 @@
 import React from 'react';
 
-function UserItem({userItem, index, removeUser}) {
+function UserItem({userItem, id, removeUser}) {
   return (
       <div className="container">
         <div className="list-group-item">{userItem.name}</div>
         <div>
-          <button className='x-btn' onClick={() => removeUser(index)}>x</button>
+          <button className='x-btn' onClick={() => removeUser(id)}>x</button>
         </div>
       </div>
   )
